@@ -1,3 +1,10 @@
+"""
+Script para otimização de imagens.
+
+Este script processa imagens de uma pasta de entrada, convertendo-as para o formato WebP,
+redimensionando se necessário para um tamanho máximo definido, e salvando na pasta de saída.
+"""
+
 import os
 from PIL import Image
 
@@ -8,6 +15,13 @@ INPUT_FOLDER = "input"
 OUTPUT_FOLDER = "output"
 
 def optimize_image(input_path, output_path):
+    """
+    Otimiza uma imagem convertendo para WebP, redimensionando se necessário e salvando com qualidade definida.
+
+    Args:
+        input_path (str): Caminho para a imagem de entrada.
+        output_path (str): Caminho para salvar a imagem otimizada.
+    """
     try:
         with Image.open(input_path) as img:
             img = img.convert("RGB")
@@ -30,6 +44,9 @@ def optimize_image(input_path, output_path):
         print(f"Erro ao processar {input_path}: {e}")
 
 def process_folder():
+    """
+    Processa todas as imagens na pasta de entrada, otimizando-as e salvando na pasta de saída.
+    """
     for root, dirs, files in os.walk(INPUT_FOLDER):
         relative_path = os.path.relpath(root, INPUT_FOLDER)
         output_dir = os.path.join(OUTPUT_FOLDER, relative_path)
